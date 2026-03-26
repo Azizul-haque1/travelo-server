@@ -11,3 +11,4 @@ export default {
   jwt_expires_in: process.env.JWT_EXPIRES_IN,
   gemini_api_key: process.env.GEMINI_API_KEY,
 };
+

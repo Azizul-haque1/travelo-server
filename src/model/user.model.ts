@@ -2,7 +2,6 @@ import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import { IUser } from "../types/user.interface";
 import config from "../config";
-import { NextFunction } from "express";
 
 const userSchema = new Schema<IUser>(
   {
@@ -54,6 +53,4 @@ userSchema.pre("save", async function () {
   );
 });
 
-
-
-export default mongoose.models.User || mongoose.model("User", userSchema);
+export const User = mongoose.models.User || mongoose.model("User", userSchema);
