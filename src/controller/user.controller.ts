@@ -122,6 +122,3 @@ export const userControllers = {
   login,
   getUsers,
 };
-
-
-

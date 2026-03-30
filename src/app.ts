@@ -1,5 +1,6 @@
 import cors from "cors";
 import express, { Application, Request, Response } from "express";
+import { UserRoutes } from "./routes/user.routes";
 
 const app: Application = express();
 
@@ -9,6 +10,8 @@ app.use(cors());
 app.get("/", (req: Request, res: Response) => {
   res.send("travelo server is running");
 });
+
+app.use("/users", UserRoutes);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({
