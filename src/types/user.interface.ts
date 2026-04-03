@@ -5,7 +5,7 @@ export interface IUser {
   email: string;
   password?: string;
 
-  avatar?: string;
+  image?: string;
 
   role: "user" | "admin";
 

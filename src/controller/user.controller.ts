@@ -81,15 +81,24 @@ const login = async (req: Request, res: Response) => {
     );
 
     // Omit password from response
-    const userResponse = user.toObject();
-    delete userResponse.password;
-
-    res.status(200).json({
-      success: true,
-      message: "User logged in successfully",
-      token,
-      data: userResponse,
-    });
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: config.cookie_secure,
+        sameSite: config.cookie_same_site,
+        maxAge: config.cookie_max_age,
+      })
+      .status(200)
+      .json({
+        success: true,
+        message: "Login successful!",
+        data: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+      });
   } catch (err: any) {
     res.status(500).json({
       success: false,
@@ -117,8 +126,30 @@ const getUsers = async (req: Request, res: Response) => {
   }
 };
 
+const logout = async (req: Request, res: Response) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: config.cookie_secure,
+      sameSite: config.cookie_same_site,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Logged out successfully",
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to logout",
+      error: error.message,
+    });
+  }
+};
+
 export const userControllers = {
   register,
   login,
   getUsers,
+  logout,
 };
