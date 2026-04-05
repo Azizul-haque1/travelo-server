@@ -1,6 +1,7 @@
 import cors from "cors";
 import express, { Application, Request, Response } from "express";
 import { UserRoutes } from "./routes/user.routes";
+import { DestinationRoutes } from "./routes/destination.routes";
 
 const app: Application = express();
 
@@ -17,6 +18,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api/users", UserRoutes);
+app.use("/api/destination", DestinationRoutes);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({
