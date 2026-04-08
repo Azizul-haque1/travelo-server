@@ -18,7 +18,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api/users", UserRoutes);
-app.use("/api/destination", DestinationRoutes);
+app.use("/api/destinations", DestinationRoutes);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({

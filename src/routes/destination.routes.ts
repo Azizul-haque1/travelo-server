@@ -10,6 +10,8 @@ router.post("/more", destinationControllers.createManyDestination);
 
 router.get("/", destinationControllers.getAllDestinations);
 
+router.get("/featured", destinationControllers.getFeaturedDestinations);
+
 router.get("/:id", destinationControllers.getSingleDestination);
 
 router.patch("/:id", destinationControllers.updateDestination);

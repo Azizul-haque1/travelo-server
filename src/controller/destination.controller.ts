@@ -88,6 +88,30 @@ const getSingleDestination = async (req: Request, res: Response) => {
   }
 };
 
+// get featured destinations
+
+// controllers/destination.controller.ts
+
+const getFeaturedDestinations = async (_req: Request, res: Response) => {
+  try {
+    const featured = await Destination.find({ isFeatured: true })
+      .sort({ createdAt: -1 }) // show newest featured first
+      .limit(4); // limit to top 6 featured
+
+    res.status(200).json({
+      success: true,
+      message: "Featured destinations fetched successfully",
+      data: featured,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch featured destinations",
+      error: error.message,
+    });
+  }
+};
+
 // Update destination
 const updateDestination = async (req: Request, res: Response) => {
   try {
@@ -155,6 +179,7 @@ export const destinationControllers = {
   createManyDestination,
   getAllDestinations,
   getSingleDestination,
+  getFeaturedDestinations,
   updateDestination,
   deleteDestination,
 };
