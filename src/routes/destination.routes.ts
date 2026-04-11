@@ -2,10 +2,17 @@
 
 import express from "express";
 import { destinationControllers } from "../controller/destination.controller";
+import { authMiddleware } from "../middleware/auth.middleware";
+import { isAdmin } from "../middleware/admin.middleware";
 
 const router = express.Router();
 
-router.post("/", destinationControllers.createDestination);
+router.post(
+  "/create",
+  authMiddleware,
+  isAdmin,
+  destinationControllers.createDestination
+);
 router.post("/more", destinationControllers.createManyDestination);
 
 router.get("/", destinationControllers.getAllDestinations);

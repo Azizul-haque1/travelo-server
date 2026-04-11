@@ -2,6 +2,8 @@ import cors from "cors";
 import express, { Application, Request, Response } from "express";
 import { UserRoutes } from "./routes/user.routes";
 import { DestinationRoutes } from "./routes/destination.routes";
+import { testRoute } from "./routes/test.routes";
+import cookieParser from "cookie-parser";
 
 const app: Application = express();
 
@@ -12,6 +14,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(cookieParser());
 
 app.get("/", (req: Request, res: Response) => {
   res.send("travelo server is running");
@@ -19,6 +22,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api/users", UserRoutes);
 app.use("/api/destinations", DestinationRoutes);
+app.use("/", testRoute);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({

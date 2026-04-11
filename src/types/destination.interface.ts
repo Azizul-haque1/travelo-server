@@ -20,7 +20,6 @@ export interface IDestination {
     | "Nature"
     | "Luxury"
     | "Adventure";
-
   tags?: string[];
 
   popularActivities?: string[];
