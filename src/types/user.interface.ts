@@ -15,6 +15,6 @@ export interface IUser {
 
   isVerified: boolean;
 
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

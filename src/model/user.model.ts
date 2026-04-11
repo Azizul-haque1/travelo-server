@@ -14,10 +14,13 @@ const userSchema = new Schema<IUser>(
       type: String,
       required: true,
       unique: true,
+      lowercase: true,
+      trim: true,
     },
 
     password: {
       type: String,
+      required: true,
       select: false,
     },
 
@@ -30,6 +33,9 @@ const userSchema = new Schema<IUser>(
       enum: ["user", "admin"],
       default: "user",
     },
+    wishlist: [{ type: String }],
+    bookings: [{ type: String }],
+    reviews: [{ type: String }],
 
     isVerified: {
       type: Boolean,
