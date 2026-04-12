@@ -60,6 +60,15 @@ const login = async (req: Request, res: Response) => {
         message: "Invalid email or password",
       });
     }
+    if (user.status !== "active") {
+      return res.status(403).json({
+        success: false,
+        message:
+          user.status === "suspended"
+            ? "Your account is suspended"
+            : "Your account is inactive",
+      });
+    }
 
     // Compare passwords
     const isPasswordMatch = await bcrypt.compare(
@@ -97,6 +106,7 @@ const login = async (req: Request, res: Response) => {
           name: user.name,
           email: user.email,
           role: user.role,
+          status: user.status,
         },
       });
   } catch (err: any) {

@@ -36,10 +36,18 @@ const userSchema = new Schema<IUser>(
     wishlist: [{ type: String }],
     bookings: [{ type: String }],
     reviews: [{ type: String }],
+    status: {
+      type: String,
+      enum: ["active", "inactive", "suspended"],
+      default: "inactive",
+    },
 
     isVerified: {
       type: Boolean,
       default: false,
+    },
+    lastLoginAt: {
+      type: Date,
     },
   },
   {
